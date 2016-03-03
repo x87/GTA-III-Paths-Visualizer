@@ -1,0 +1,24 @@
+{
+    "name": "gta3paths",
+    "version": "1.0.0",
+    "description": "",
+    "main": "sketch3.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/x87/GTA-III-Paths-Visualizer.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/x87/GTA-III-Paths-Visualizer/issues"
+    },
+    "homepage": "https://github.com/x87/GTA-III-Paths-Visualizer#readme",
+    "dependencies": {
+        "p5": "^0.4.22"
+    },
+    "private": true
+}
