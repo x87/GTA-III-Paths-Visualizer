@@ -1,7 +1,7 @@
 <?php
 include_once 'RwV3d.class.php';
 include_once 'Cache.class.php';
-
+include_once 'Quaternion.class.php';
 
 class PathReader
 {
@@ -107,7 +107,8 @@ class PathReader
                 foreach ($data as $entry) {
                     $result[] = array(
                         'id'  => $entry[0],
-                        'pos' => new RwV3D($entry[2], $entry[3], $entry[4])
+                        'pos' => new RwV3D($entry[2], $entry[3], $entry[4]),
+                        'rot' => new Quaternion($entry[8], $entry[9], $entry[10], $entry[11])
                     );
                 }
 
@@ -160,7 +161,8 @@ class PathReader
         foreach ($data as $entry) {
             $result[] = array(
                 'id'  => $entry[0],
-                'pos' => new RwV3D($entry[2], $entry[3], $entry[4])
+                'pos' => new RwV3D($entry[2], $entry[3], $entry[4]),
+                'rot' => new Quaternion($entry[8], $entry[9], $entry[10], $entry[11])
             );
         }
 
@@ -228,7 +230,8 @@ class PathReader
                     foreach ($data as $entry) {
                         $insts[] = array(
                             'id'  => $entry[0],
-                            'pos' => new RwV3D($entry[2], $entry[3], $entry[4])
+                            'pos' => new RwV3D($entry[2], $entry[3], $entry[4]),
+                            'rot' => new Quaternion($entry[8], $entry[9], $entry[10], $entry[11])
                         );
                     }
                     break;
@@ -273,6 +276,7 @@ class PathReader
                 $result[] = array(
                     //'id'   => $obj['id'],
                     'pos'  => $obj['pos'],
+                    'rot'  => $obj['rot'],
                     'node' => $path[$obj['id']]
                 );
             }

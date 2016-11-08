@@ -52,12 +52,32 @@ function polygon(p, bFill, s, s_x, s_y) {
     print_text(s, s_x + 10, s_y + 40, 40, 150, "Segoe UI Light");
 }
 
+function dot(a, b) {
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+function cross(a, b) {
+    return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+}
+
+// http://gamedev.stackexchange.com/a/50545
+function qrotate(x, y, z, rx, ry, rz, rw) {
+    return [2.0 * dot([x, y, z], [rx, ry, rz]) * rx + (rw * rw - dot([rx, ry, rz], [rx, ry, rz])) * x + 2.0 * rw * cross([x, y, z], [rx, ry, rz])[0],
+            2.0 * dot([x, y, z], [rx, ry, rz]) * ry + (rw * rw - dot([rx, ry, rz], [rx, ry, rz])) * y + 2.0 * rw * cross([x, y, z], [rx, ry, rz])[1],
+            2.0 * dot([x, y, z], [rx, ry, rz]) * rz + (rw * rw - dot([rx, ry, rz], [rx, ry, rz])) * z + 2.0 * rw * cross([x, y, z], [rx, ry, rz])[2]];
+}
+
 function drawMap(data) {
 
     data.map(function (el) {
 
         var x = parseFloat(el.pos.x);
         var y = parseFloat(el.pos.y);
+        var z = parseFloat(el.pos.z);
+        var rx = parseFloat(el.rot.x);
+        var ry = parseFloat(el.rot.y);
+        var rz = parseFloat(el.rot.z);
+        var rw = parseFloat(el.rot.w);
 
         for (t in el.node) {
             if (el.node.hasOwnProperty(t)) {
@@ -93,25 +113,28 @@ function drawMap(data) {
                     }
 
 
-                    var nodeX = x + n[3] / 16;
-                    var nodeY = y + n[4] / 16;
+                    var rotated = qrotate(n[3] / 16, n[4] / 16, 0, rx, ry, rz, rw);
+                    var nodeX = x + rotated[0];
+                    var nodeY = y + rotated[1];
                     var _link = n[1];
                     if (_link !== -1 && el.node[t].length > _link) {
 
                         var link = el.node[t][_link];
                         stroke(255);
-                        if (link)
-                            line(px(nodeX), py(nodeY), px(x + link[3] / 16), py(y + link[4] / 16));
+                        if (link) {
+                            var rotatedLink = qrotate(link[3] / 16, link[4] / 16, 0, rx, ry, rz, rw);
+                            line(px(nodeX), py(nodeY), px(x + rotatedLink[0]), py(y + rotatedLink[1]));
+                        }
                     }
-                    ppoint(x + n[3] / 16, y + n[4] / 16);
+                    ppoint(x + rotated[0], y + rotated[1]);
                 });
                 // roadblocks
-                if (ext == 2 && int == 1) {
+                /*if (ext == 2 && int == 1) {
                     fill(0, 255, 0, 255);
                     ppoint(x, y);
                     ext = 0;
                     int = 0;
-                }
+                }*/
             }
         }
     });
