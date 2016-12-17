@@ -140,15 +140,16 @@ function drawMap(data) {
     });
 
 }
+
+var data, img;
+
+function preload() {
+    data = loadJSON('./gta3.json');
+    img = loadImage('gta3map.png');
+}
+
 function setup() {
     createCanvas(mapsize, mapsize);
-    httpPost('/gta3paths/', {
-        gameDir: "G:\\gta3",
-        cache: 1
-    }, 'json', function (response) {
-        loadImage("gta3map.png", function (img) {
-            image(img, 0, 0, mapsize, mapsize);
-            drawMap(response);
-        });
-    })
+    image(img, 0, 0, mapsize, mapsize);
+    drawMap(data);
 }
