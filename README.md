@@ -3,25 +3,32 @@
 * NodeJS v4 +
 * npm v3 +
 
-## How to use
+## Usage
 
-* Get required dependencies by running
+Clone the repository
+```
+git clone https://github.com/x87/GTA-III-Paths-Visualizer.git
+cd GTA-III-Paths-Visualizer
+```
+
+Get the required dependencies by running
 ```
 npm install
 ```
 
-* Build PATH data for your GTA III installation
+Build the PATH data out of your GTA III files
 
- ```
- node build.js -p "GTA-3-directory" > gta3.json
- ```
+```
+node build.js -p "/path/to/GTA III" > gta3.json
+```
 
-where `GTA-3-directory` is the full path to your GTA III directory, i.e.
+where `/path/to/GTA III` is the full path to your GTA III directory.
 
- ```
- node build.js -p "D:\\Games\\GTA III" > gta3.json
- ```
-* Open `index.html` in your browser.
-
-
-
+```
+node build.js -p "D:\\Games\\GTA III" > gta3.json
+```
+Run
+```
+npm start
+```
+Open `http://localhost:4444` in your browser. You should see a map image with paths rendered on it.

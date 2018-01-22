@@ -1,25 +1,25 @@
 {
-  "name": "gta3paths",
+  "name": "GTA-III-Paths-Visualizer",
   "version": "1.0.0",
-  "description": "",
+  "description": "GTA III Paths Visualizer",
   "main": "sketch3.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/x87/GTA-III-Paths-Visualizer.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Seemann",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/x87/GTA-III-Paths-Visualizer/issues"
   },
   "homepage": "https://github.com/x87/GTA-III-Paths-Visualizer#readme",
   "dependencies": {
     "command-line-args": "3.0.4",
-    "p5": "0.4.22"
+    "node-static": "0.7.10"
   },
   "private": true
 }
