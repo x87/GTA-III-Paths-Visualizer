@@ -4,7 +4,7 @@ var file = new static.Server(__dirname);
 require('http').createServer(function (request, response) {
     request.addListener('end', function () {
         file.serve(request, response);
-    }).resume();    
+    }).resume();
 }).listen(4444);
 
 console.log('Open http://localhost:4444 in a browser');

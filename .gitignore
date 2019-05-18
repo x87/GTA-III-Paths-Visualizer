@@ -1,4 +1,5 @@
 .idea
 .htaccess
+.vscode
 cache/*
 node_modules
